@@ -10,8 +10,7 @@ class SignIn extends StatelessWidget {
   SignIn({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
-  final _firstnameController = TextEditingController();
-  final _lastnameController = TextEditingController();
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -109,10 +108,10 @@ class SignIn extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const HomeView(),
+                            builder: (context) => HomeView(),
                           ),
                         );
-                         //Get Platform OS navigation
+                        //Get Platform OS navigation
                         //   Platform.isAndroid ? Navigator.push(
                         //   context,
                         //   MaterialPageRoute(
