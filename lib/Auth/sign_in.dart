@@ -1,5 +1,10 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:period/Auth/sign_up.dart';
+import 'package:period/screens/home_view.dart';
 
 class SignIn extends StatelessWidget {
   SignIn({Key? key}) : super(key: key);
@@ -39,92 +44,49 @@ class SignIn extends StatelessWidget {
                       decoration: TextDecoration.underline,
                     ),
                   ),
-                  TextFormField(
-                    controller: _firstnameController,
-                    keyboardType: TextInputType.name,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter your firstname';
-                      } else {
-                        return null;
-                      }
-                    },
-                    decoration: const InputDecoration(
-                      //hintText: 'Enter Firstname',
-                      labelText: 'Enter Firstname',
-                    ),
-                  ),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   TextFormField(
-                    controller: _lastnameController,
-                    keyboardType: TextInputType.name,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter your lastname';
-                      } else {
+                      controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        if (!value!.contains('@') ||
+                            !value.endsWith('.com') ||
+                            value.isEmpty) {
+                          return "Invalid Email";
+                        }
                         return null;
-                      }
-                    },
-                    decoration: const InputDecoration(
-                      //hintText: 'Enter Firstname',
-                      labelText: 'Enter Lastname',
-                    ),
-                  ),
+                      },
+                      decoration: InputDecoration(
+                        //hintText: 'Enter Firstname',
+                        labelText: 'Enter Email',
+                        suffixIcon: const Icon(FontAwesomeIcons.envelope),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      )),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   TextFormField(
-                    controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter your email';
-                      } else {
-                        return null;
-                      }
-                    },
-                    decoration: const InputDecoration(
-                      //hintText: 'Enter Firstname',
-                      labelText: 'Enter Email',
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
+                    maxLength: 16,
                     controller: _passwordController,
                     keyboardType: TextInputType.text,
                     obscureText: true,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Please enter your password';
-                      } else {
-                        return null;
                       }
+                      return null;
                     },
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       //hintText: 'Enter Firstname',
                       labelText: 'Enter Password',
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    keyboardType: TextInputType.text,
-                    obscureText: true,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter your password';
-                      } else {
-                        return null;
-                      }
-                    },
-                    decoration: const InputDecoration(
-                      //hintText: 'Enter Firstname',
-                      labelText: 'Confirm Password',
+                      suffixIcon: const Icon(FontAwesomeIcons.lock),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -141,17 +103,34 @@ class SignIn extends StatelessWidget {
                         // If the form is valid, display a Snackbar.
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Processing Data'),
+                            content: Text('Welcome Back'),
                           ),
                         );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomeView(),
+                          ),
+                        );
+                         //Get Platform OS navigation
+                        //   Platform.isAndroid ? Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => const HomeView(),
+                        //   ),
+                        // ) : Navigator.push(
+                        //   context,
+                        //   CupertinoPageRoute(
+                        //     builder: (context) => const HomeView(),
+                        //   ),
+                        // );
                       }
                     },
                     child: const Padding(
-                      padding:  EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Text('Sign In'),
                     ),
                   ),
-
                   const SizedBox(
                     height: 10,
                   ),
@@ -162,7 +141,6 @@ class SignIn extends StatelessWidget {
                         'Don\'t have an account?',
                         style: TextStyle(
                           fontSize: 15,
-              
                         ),
                       ),
                       const SizedBox(
@@ -170,7 +148,11 @@ class SignIn extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SignUp(),),);
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => SignUp(),
+                            ),
+                          );
                         },
                         child: const Text(
                           'Sign Up',
@@ -182,7 +164,6 @@ class SignIn extends StatelessWidget {
                         ),
                       ),
                     ],
-                    
                   )
                 ],
               ),

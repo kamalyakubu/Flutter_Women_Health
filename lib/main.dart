@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:period/Auth/sign_in.dart';
+import 'package:period/screens/home_view.dart';
 
 void main() {
   runApp(
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
      
         primarySwatch: Colors.pink,
       ),
-      home:  SignIn(),
+      home:  const HomeView(),
     );
   }
 }
